@@ -9,25 +9,27 @@ Execute consistent, evidence-based triage for HackenProof bug bounty reports.
 
 ## Workflow
 
-1. Run pre-validation gates in strict order:
+1. Apply global HackenProof classification baseline from `references/hackenproof-global-policy.md`.
+2. Run pre-validation gates in strict order:
    a. Verify the reported commit/version is the intended in-scope commit.
    b. Verify the submission target and impact are in scope.
    c. Verify whether an equivalent duplicate already exists.
-2. Start technical validation only after all pre-validation gates pass.
-3. Classify severity, choose state transition, and apply labels.
-4. Post a concise decision comment with explicit rationale and next action.
+3. Start technical validation only after all pre-validation gates pass.
+4. Classify severity, choose state transition, and apply labels.
+5. Post a concise decision comment with explicit rationale and next action.
 
 ## Mandatory Tool Sequence
 
 1. Run `get_program_info` for scope and reward context.
-2. Run `get_report_details` to extract target, asset, and reported commit/version.
-3. Run `get_attachments` and `fetch_attachment` to confirm commit/version evidence in PoC files.
-4. Compare commit/version against in-scope assets and versions from program rules.
-5. Verify in-scope status for both target and claimed impact using program scope/rules.
-6. Run `list_reports`/`search_comments` to check duplicate candidates before validation.
-7. Start validation: confirm reproducibility, impact, exploit preconditions, and proof quality.
-8. Run `get_comments` before posting to avoid contradictory messaging.
-9. Only then change `severity`, `state`, `labels`, and add comments.
+2. Map the report to baseline policy domain (`web-mobile`, `smart-contract`, `blockchain-protocol`) using `references/hackenproof-global-policy.md`.
+3. Run `get_report_details` to extract target, asset, and reported commit/version.
+4. Run `get_attachments` and `fetch_attachment` to confirm commit/version evidence in PoC files.
+5. Compare commit/version against in-scope assets and versions from program rules.
+6. Verify in-scope status for both target and claimed impact using program scope/rules, then global baseline if no override exists.
+7. Run `list_reports`/`search_comments` to check duplicate candidates before validation.
+8. Start validation: confirm reproducibility, impact, exploit preconditions, and proof quality.
+9. Run `get_comments` before posting to avoid contradictory messaging.
+10. Only then change `severity`, `state`, `labels`, and add comments.
 
 ## Pre-Validation Gates
 
@@ -58,6 +60,7 @@ Execute consistent, evidence-based triage for HackenProof bug bounty reports.
 - Move valid reports to `Triaged` with severity aligned to program policy and demonstrated impact.
 
 Use `references/severity-mapping.md` for impact-to-severity normalization.
+Use `references/hackenproof-global-policy.md` for HackenProof-wide scope and severity baseline.
 Use `references/triage-comment-templates.md` for consistent responder tone and structure.
 
 ## Quality Bar
