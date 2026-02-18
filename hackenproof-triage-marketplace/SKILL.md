@@ -22,16 +22,17 @@ Execute consistent, evidence-based triage for HackenProof bug bounty reports.
 ## Mandatory Tool Sequence
 
 1. Run `get_program_info` for scope and reward context.
-2. Map the report to baseline policy domain (`web-mobile`, `smart-contract`, `blockchain-protocol`) using `references/hackenproof-global-policy.md`.
-3. Run `get_report_details` to extract target, asset, and reported commit/version.
-4. Run `get_attachments`; if no PoC evidence exists, set `Need more info` immediately.
-5. Run `fetch_attachment` to confirm commit/version evidence in PoC files.
-6. Compare commit/version against in-scope assets and versions from program rules.
-7. Verify in-scope status for both target and claimed impact using program scope/rules, then global baseline if no override exists.
-8. Run `list_reports`/`search_comments` to check duplicate candidates before validation.
-9. Start validation: confirm reproducibility, impact, exploit preconditions, and proof quality.
-10. Run `get_comments` before posting to avoid contradictory messaging.
-11. Only then change `severity`, `state`, `labels`, and add comments.
+2. Detect program type from `get_program_info` (for example: `web`, `mobile`, `smart-contract`, `blockchain`).
+3. Map detected type to the equivalent vulnerability classification section in `references/hackenproof-global-policy.md`.
+4. Run `get_report_details` to extract target, asset, and reported commit/version.
+5. Run `get_attachments`; if no PoC evidence exists, set `Need more info` immediately.
+6. Run `fetch_attachment` to confirm commit/version evidence in PoC files.
+7. Compare commit/version against in-scope assets and versions from program rules.
+8. Verify in-scope status for both target and claimed impact using program scope/rules, then global baseline if no override exists.
+9. Run `list_reports`/`search_comments` to check duplicate candidates before validation.
+10. Start validation: confirm reproducibility, impact, exploit preconditions, and proof quality.
+11. Run `get_comments` before posting to avoid contradictory messaging.
+12. Only then change `severity`, `state`, `labels`, and add comments.
 
 ## Pre-Validation Gates
 
@@ -45,6 +46,7 @@ Execute consistent, evidence-based triage for HackenProof bug bounty reports.
 
 - Confirm target asset is in scope.
 - Confirm reported impact category is in scope for bounty eligibility.
+- Confirm the finding matches the equivalent classification track for the detected program type.
 - If either target or impact is excluded, mark `Out of scope` with explicit rule reference.
 
 ### Gate 3: Duplicate Check

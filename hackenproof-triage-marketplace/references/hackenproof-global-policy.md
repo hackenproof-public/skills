@@ -15,6 +15,16 @@ Source docs:
 2. If no program-specific override exists, use this global policy.
 3. If classification is still ambiguous, use CVSS-based reasoning and request more evidence.
 
+## Program Type to Classification Mapping
+
+Derive the program type from `get_program_info` labels/scope metadata, then use:
+
+- `web` or `mobile` -> Web & Mobile classification + Web & Mobile out-of-scope list
+- `smart-contract`, `sc`, `solidity`, `evm`, `move` -> Smart Contract classification
+- `blockchain`, `protocol`, `node`, `consensus`, `l1`, `l2` -> Blockchain Protocol classification
+
+If labels indicate mixed scope, classify by impacted component first (application, contract, or protocol layer), then use the matching track.
+
 ## Web & Mobile Severity Baseline
 
 - `Critical`: payments manipulation, SQLi, RCE, command injection, business logic causing user fund/asset loss.
