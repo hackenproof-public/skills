@@ -17,7 +17,7 @@ Install from GitHub using the built-in skill installer:
 
 ```bash
 python3 ~/.codex/skills/.system/skill-installer/scripts/install-skill-from-github.py \
-  --repo <owner>/<repo> \
+  --repo hackenproof-public/skills \
   --path hackenproof-triage-marketplace \
   --ref main
 ```
@@ -42,7 +42,7 @@ If your Claude environment supports Codex-style skills, install to its skill dir
 
 ```bash
 python3 ~/.codex/skills/.system/skill-installer/scripts/install-skill-from-github.py \
-  --repo <owner>/<repo> \
+  --repo hackenproof-public/skills \
   --path hackenproof-triage-marketplace \
   --ref main \
   --dest <claude-skills-dir>
