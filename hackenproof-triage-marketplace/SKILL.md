@@ -13,7 +13,8 @@ Execute consistent, evidence-based triage for HackenProof bug bounty reports.
 2. Run pre-validation gates in strict order:
    a. Verify the reported commit/version is the intended in-scope commit.
    b. Verify the submission target and impact are in scope.
-   c. Verify whether an equivalent duplicate already exists.
+   c. Verify PoC evidence is provided and readable.
+   d. Verify whether an equivalent duplicate already exists.
 3. Start technical validation only after all pre-validation gates pass.
 4. Classify severity, choose state transition, and apply labels.
 5. Post a concise decision comment with explicit rationale and next action.
@@ -23,13 +24,14 @@ Execute consistent, evidence-based triage for HackenProof bug bounty reports.
 1. Run `get_program_info` for scope and reward context.
 2. Map the report to baseline policy domain (`web-mobile`, `smart-contract`, `blockchain-protocol`) using `references/hackenproof-global-policy.md`.
 3. Run `get_report_details` to extract target, asset, and reported commit/version.
-4. Run `get_attachments` and `fetch_attachment` to confirm commit/version evidence in PoC files.
-5. Compare commit/version against in-scope assets and versions from program rules.
-6. Verify in-scope status for both target and claimed impact using program scope/rules, then global baseline if no override exists.
-7. Run `list_reports`/`search_comments` to check duplicate candidates before validation.
-8. Start validation: confirm reproducibility, impact, exploit preconditions, and proof quality.
-9. Run `get_comments` before posting to avoid contradictory messaging.
-10. Only then change `severity`, `state`, `labels`, and add comments.
+4. Run `get_attachments`; if no PoC evidence exists, set `Need more info` immediately.
+5. Run `fetch_attachment` to confirm commit/version evidence in PoC files.
+6. Compare commit/version against in-scope assets and versions from program rules.
+7. Verify in-scope status for both target and claimed impact using program scope/rules, then global baseline if no override exists.
+8. Run `list_reports`/`search_comments` to check duplicate candidates before validation.
+9. Start validation: confirm reproducibility, impact, exploit preconditions, and proof quality.
+10. Run `get_comments` before posting to avoid contradictory messaging.
+11. Only then change `severity`, `state`, `labels`, and add comments.
 
 ## Pre-Validation Gates
 
@@ -51,9 +53,14 @@ Execute consistent, evidence-based triage for HackenProof bug bounty reports.
 - Treat as duplicate only when both root cause and impact match an existing report.
 - Add `dup-{report_id}` label when marking `Duplicate`.
 
+### Gate 4: PoC Presence Check
+
+- Confirm at least one usable PoC artifact exists (steps, payload, tx hash, video, logs, or attachment).
+- If no PoC is provided, set `Need more info` and request concrete PoC evidence.
+
 ## Decision Rules
 
-- Reject or mark `Need more info` when commit/version evidence is missing, or reproduction steps are incomplete with no verifiable PoC.
+- Reject or mark `Need more info` when PoC is missing, commit/version evidence is missing, or reproduction steps are incomplete with no verifiable PoC.
 - Mark `Out of scope` when target or impact is excluded by program scope/rules.
 - Mark `Duplicate` only when matching root cause and impact are confirmed; add `dup-{report_id}` label.
 - Use `Informative`/`Not applicable` for weak-impact findings that do not meet bounty criteria.
