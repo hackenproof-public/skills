@@ -6,7 +6,7 @@ Use this baseline when program-specific rules do not override it.
 - `High`: Major security impact (privilege escalation, substantial theft, permanent denial of service) with practical exploitability.
 - `Medium`: Meaningful security weakness with constrained impact or stronger preconditions.
 - `Low`: Limited impact, narrow edge case, or low-likelihood abuse.
-- `Informational`: Best-practice issue without material security impact.
+- `None`: Best-practice issue without material security impact.
 
 ## Adjustments
 
