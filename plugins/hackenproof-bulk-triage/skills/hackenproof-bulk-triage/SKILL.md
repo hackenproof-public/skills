@@ -19,7 +19,7 @@ Analyze all open reports across all assigned programs and produce a structured r
 
 ## Step 1: Load Config
 
-Read `~/.claude/hackenproof-repos.yaml` using the Read tool.
+Read `~/.claude/hackenproof-repos.yaml` using the Read tool. See `references/setup-guide.md` for file format and examples.
 Parse the `programs` mapping: `program-slug → { repo?, branch?, explorer?, enabled? }`.
 
 Skip any program entry where `enabled: false`.
