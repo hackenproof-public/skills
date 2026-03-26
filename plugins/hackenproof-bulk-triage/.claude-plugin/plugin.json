@@ -1,0 +1,8 @@
+{
+  "name": "hackenproof-bulk-triage",
+  "version": "0.1.0",
+  "description": "Bulk triage workflow for all assigned HackenProof programs",
+  "author": {
+    "name": "HackenProof"
+  }
+}

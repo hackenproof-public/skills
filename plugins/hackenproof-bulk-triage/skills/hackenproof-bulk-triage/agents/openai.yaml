@@ -1,0 +1,4 @@
+interface:
+  display_name: "HackenProof Bulk Triage"
+  short_description: "Bulk triage all open reports across assigned programs"
+  default_prompt: "Use $hackenproof-bulk-triage to analyze all open reports and produce a recommendation report for review."

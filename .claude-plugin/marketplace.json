@@ -9,6 +9,11 @@
       "name": "hackenproof-triage",
       "description": "Bug bounty triage workflow for HackenProof programs",
       "source": "./plugins/hackenproof-triage"
+    },
+    {
+      "name": "hackenproof-bulk-triage",
+      "description": "Bulk triage workflow for all assigned HackenProof programs",
+      "source": "./plugins/hackenproof-bulk-triage"
     }
   ]
 }
