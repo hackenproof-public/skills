@@ -1,0 +1,14 @@
+{
+  "name": "hackenproof-skills",
+  "description": "HackenProof bug bounty triage skills and tools",
+  "owner": {
+    "name": "HackenProof"
+  },
+  "plugins": [
+    {
+      "name": "hackenproof-triage",
+      "description": "Bug bounty triage workflow for HackenProof programs",
+      "source": "./plugins/hackenproof-triage"
+    }
+  ]
+}

@@ -1,0 +1,8 @@
+{
+  "name": "hackenproof-triage",
+  "version": "0.1.0",
+  "description": "HackenProof bug bounty triage workflow for consistent report handling",
+  "author": {
+    "name": "HackenProof"
+  }
+}

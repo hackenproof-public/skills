@@ -1,63 +1,85 @@
-# HackenProof Triage Marketplace Skill
+# HackenProof Skills Marketplace
+
+Claude Code plugin marketplace for HackenProof bug bounty triage.
+
+## Plugins
+
+### hackenproof-triage
 
 Reusable triage skill for HackenProof report handling:
 
-- verify commit/version is in scope
-- verify submission scope
-- check duplicates
-- validate submission and decide state/severity/comment
+- Verify commit/version is in scope
+- Verify submission scope
+- Check duplicates
+- Validate submission and decide state/severity/comment
 
-Skill folder:
+## Install in Claude Code
 
-- `hackenproof-triage-marketplace/`
+### Option 1: Server-Managed Settings (org-wide)
 
-## Install for Codex
+Add to your organization's managed settings at **claude.ai → Admin Settings → Claude Code → Managed settings**:
 
-Install from GitHub using the built-in skill installer:
-
-```bash
-python3 ~/.codex/skills/.system/skill-installer/scripts/install-skill-from-github.py \
-  --repo hackenproof-public/skills \
-  --path hackenproof-triage-marketplace \
-  --ref main
+```json
+{
+  "extraKnownMarketplaces": {
+    "hackenproof-skills": {
+      "source": {
+        "source": "github",
+        "repo": "hackenproof-public/skills"
+      }
+    }
+  },
+  "enabledPlugins": {
+    "hackenproof-triage@hackenproof-skills": true
+  }
+}
 ```
 
-For private repositories:
+All authenticated org members will receive the plugin automatically.
 
-```bash
-export GITHUB_TOKEN=<token>
+### Option 2: Project-level
+
+Add to your project's `.claude/settings.json`:
+
+```json
+{
+  "extraKnownMarketplaces": {
+    "hackenproof-skills": {
+      "source": {
+        "source": "github",
+        "repo": "hackenproof-public/skills"
+      }
+    }
+  },
+  "enabledPlugins": {
+    "hackenproof-triage@hackenproof-skills": true
+  }
+}
 ```
 
-After install, restart Codex.
+### Option 3: Manual
 
-Use in prompt:
+1. Run `/plugin` in Claude Code
+2. Go to **Marketplaces** tab
+3. Add marketplace: `hackenproof-public/skills`
+4. Install `hackenproof-triage`
 
-```text
-Use $hackenproof-triage-marketplace to triage report HACK-123.
+## Repository Structure
+
 ```
-
-## Install for Claude
-
-If your Claude environment supports Codex-style skills, install to its skill directory:
-
-```bash
-python3 ~/.codex/skills/.system/skill-installer/scripts/install-skill-from-github.py \
-  --repo hackenproof-public/skills \
-  --path hackenproof-triage-marketplace \
-  --ref main \
-  --dest <claude-skills-dir>
+.claude-plugin/
+  marketplace.json          # Marketplace index
+plugins/
+  hackenproof-triage/
+    .claude-plugin/
+      plugin.json           # Plugin manifest
+    skills/
+      hackenproof-triage-marketplace/
+        SKILL.md            # Skill definition
+        agents/
+          openai.yaml
+        references/
+          hackenproof-global-policy.md
+          severity-mapping.md
+          triage-comment-templates.md
 ```
-
-Then reload/restart Claude and invoke:
-
-```text
-Use $hackenproof-triage-marketplace to triage report HACK-123.
-```
-
-If your Claude setup uses a different plugin format, keep this repo as source-of-truth and add an import/conversion step in your Claude pipeline.
-
-## Publish Checklist
-
-1. Push `hackenproof-triage-marketplace/` to GitHub.
-2. Create a tag (example: `v0.1.0`) for stable installs.
-3. Install by tag with `--ref v0.1.0` for reproducible team behavior.
