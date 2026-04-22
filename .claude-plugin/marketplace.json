@@ -19,6 +19,11 @@
       "name": "hackenproof-handoff",
       "description": "Generate structured report handoff summaries for client teams",
       "source": "./plugins/hackenproof-handoff"
+    },
+    {
+      "name": "hackenproof-fix-verifier",
+      "description": "Verify security fixes are correct, complete, and regression-free",
+      "source": "./plugins/hackenproof-fix-verifier"
     }
   ]
 }

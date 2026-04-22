@@ -1,0 +1,8 @@
+{
+  "name": "hackenproof-fix-verifier",
+  "version": "0.1.0",
+  "description": "Verify that a security fix actually addresses the vulnerability without introducing new issues",
+  "author": {
+    "name": "HackenProof"
+  }
+}
