@@ -1,0 +1,8 @@
+{
+  "name": "hackenproof-all-reports-export",
+  "version": "0.1.0",
+  "description": "Export all reports of a HackenProof program into a structured file (Markdown, JSON, or CSV — user's choice)",
+  "author": {
+    "name": "HackenProof"
+  }
+}
