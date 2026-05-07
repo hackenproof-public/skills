@@ -1,0 +1,4 @@
+interface:
+  display_name: "HackenProof All Reports Export"
+  short_description: "Export all reports of a HackenProof program into a structured Markdown file"
+  default_prompt: "Use $hackenproof-all-reports-export to export all reports of a HackenProof program into a structured Markdown file with cover page, table of contents, and per-report sections."
