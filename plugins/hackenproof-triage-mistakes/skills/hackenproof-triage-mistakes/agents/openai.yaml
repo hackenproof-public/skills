@@ -1,0 +1,4 @@
+interface:
+  display_name: "HackenProof Triage Mistakes"
+  short_description: "Load accumulated triage mistakes before starting a session"
+  default_prompt: "Load $hackenproof-triage-mistakes before starting this triage session."

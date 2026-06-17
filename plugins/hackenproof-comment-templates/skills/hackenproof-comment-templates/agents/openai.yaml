@@ -1,0 +1,4 @@
+interface:
+  display_name: "HackenProof Comment Templates"
+  short_description: "Generate structured triage comments from standard templates"
+  default_prompt: "Use $hackenproof-comment-templates to draft a triage comment for this report."
