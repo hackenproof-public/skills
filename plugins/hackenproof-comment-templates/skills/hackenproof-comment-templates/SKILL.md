@@ -1,3 +1,8 @@
+---
+name: hackenproof-comment-templates
+description: Standard HackenProof triage closure comment templates for Out of Scope, Informative, Not Applicable, Need More Info, Duplicate, and Dual Defence Informative states. Use whenever writing a closure or decision comment on a HackenProof report. Trigger on "closure comment", "triage comment", "write comment", "close as", or any state transition that requires a comment.
+---
+
 # HackenProof Comment Templates
 
 Generate structured, professional triage comments using the standard HackenProof template format.
@@ -16,7 +21,7 @@ Use when writing a closure or decision comment on any HackenProof report. Load `
 ## Comment Rules
 
 - Every comment must explain the specific rule violated, what evidence was missing, and what would be needed to resubmit
-- Never reference other report IDs — reporters cannot see them
+- Never reference other report IDs in the comment body — reporters cannot see them. Internal labels like `dup-{id}` are fine because they are not part of the comment.
 - Never mention the specific severity label in Dual Defence closure comments — reference the threshold only
 - Never disclose private information (attack prerequisites, internal severity caps, client-side decisions) in public comments
 - Verify every factual claim before writing it

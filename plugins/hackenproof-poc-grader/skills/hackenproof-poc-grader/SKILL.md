@@ -1,3 +1,8 @@
+---
+name: hackenproof-poc-grader
+description: Grade the evidence quality of a HackenProof bug bounty report before forming a severity opinion. Returns one of five verdicts (Verified, Plausible, Weak, Invalid, Out of Scope Evidence) based on a rubric of evidence tiers and negative signals. Trigger on "grade poc", "evidence quality", "is this poc valid", "check evidence", or before any triage severity decision.
+---
+
 # HackenProof PoC Grader
 
 Evaluate the quality of evidence in a HackenProof bug bounty report and return a quality verdict before triage.
@@ -30,10 +35,20 @@ Grade all collected evidence against the tiers and signals in `references/poc-gr
 
 ### Step 5 — Return verdict
 
+Pick exactly one verdict from the rubric:
+
+- **Verified** — Tier 1 evidence, ready for severity analysis
+- **Plausible** — Tier 2 evidence, proceed with caution
+- **Weak** — Tier 3 or Tier 4 evidence, set Need More Info
+- **Invalid** — Negative signal hit, close as Not Applicable
+- **Out of Scope Evidence** — Negative signal hit, close as Out of Scope
+
+Output format:
+
 ```
-PoC Quality: [Verdict from rubric]
+PoC Quality: [Verdict]
 Reason: [One sentence — what evidence is present and why this verdict applies]
-Missing (NMI only): [Exactly what would upgrade this to Verified]
+Missing (Weak only): [Exactly what would upgrade this to Verified]
 ```
 
 ## Self-Expanding

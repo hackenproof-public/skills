@@ -1,15 +1,25 @@
+---
+name: hackenproof-triage-mistakes
+description: Accumulated HackenProof triage mistakes and corrections. Load at the start of every triage session and selectively before evidence evaluation, severity decisions, comment writing, or batch closes. Self-expands per-analyst into ~/.hackenproof/mistakes/. Trigger on "triage", "review report", "before triage", or any HackenProof report decision.
+---
+
 # HackenProof Triage Mistakes
 
 Load accumulated triage mistakes before every session to prevent repeating known errors. Self-expands as new mistakes are discovered.
 
 ## When to Use
 
-Load at the start of every triage session. Also load selectively during triage:
-- About to evaluate evidence → load `evidence.md`
-- About to form a severity opinion → load `decisions.md`
-- About to write a comment → load `comments.md`
-- Running a batch close → load `workflow.md`
-- Triaging CORS, SC, or mobile reports → load `patterns.md`
+At session start, read the shared base in `references/triage-mistakes.md`.
+
+During a session, when a personal `~/.hackenproof/mistakes/<category>.md` exists, load only the relevant category:
+
+- About to evaluate evidence → `~/.hackenproof/mistakes/evidence.md`
+- About to form a severity opinion → `~/.hackenproof/mistakes/decisions.md`
+- About to write a comment → `~/.hackenproof/mistakes/comments.md`
+- Running a batch close → `~/.hackenproof/mistakes/workflow.md`
+- Triaging CORS, SC, or mobile reports → `~/.hackenproof/mistakes/patterns.md`
+
+If a personal category file does not exist, the shared base alone is sufficient — do not block on the missing file.
 
 ## File Structure
 

@@ -1,5 +1,17 @@
 # PoC Grading Rubric
 
+## Verdicts
+
+Each grading session returns exactly one of these:
+
+- **Verified** — Tier 1 evidence. Proceed to severity analysis.
+- **Plausible** — Tier 2 evidence. Lean toward lower severity until confirmed.
+- **Weak** — Tier 3 or Tier 4 evidence. Set Need More Info; state exactly what is missing.
+- **Invalid** — Negative signal in the Invalid Evidence list. Close as Not Applicable.
+- **Out of Scope Evidence** — Negative signal in the Out of Scope Evidence list. Close as Out of Scope.
+
+Negative signals override tier — if a negative signal matches, the verdict is Invalid or OOS Evidence regardless of tier.
+
 ## Evidence Tiers
 
 ### Tier 1 — Verified (strongest)
@@ -15,13 +27,13 @@
 - Burp Suite capture showing server response to crafted request on live endpoint
 - curl output showing live server behavior (not for XSS/CORS credential claims — those require browser)
 
-### Tier 3 — Weak Evidence (→ Need More Info)
+### Tier 3 — Weak (→ Need More Info)
 - Screenshots only, no video or reproduction guide
 - curl showing headers or config without demonstrating actual impact
 - Code review identifying a pattern without live execution
 - Reproduction steps that require significant attacker prerequisites not addressed
 
-### Tier 4 — Insufficient (→ Need More Info)
+### Tier 4 — Weak / Insufficient lab conditions (→ Need More Info)
 - Localhost PoC where attacker domain is 127.0.0.1 or same machine
 - Local environment only, not tested against the live application
 - Missing key steps in reproduction guide
