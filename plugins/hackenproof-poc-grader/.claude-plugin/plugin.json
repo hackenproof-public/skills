@@ -1,0 +1,8 @@
+{
+  "name": "hackenproof-poc-grader",
+  "version": "0.1.0",
+  "description": "Grade PoC evidence quality in HackenProof reports before triage",
+  "author": {
+    "name": "HackenProof"
+  }
+}

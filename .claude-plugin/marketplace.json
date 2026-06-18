@@ -29,6 +29,21 @@
       "name": "hackenproof-all-reports-export",
       "description": "Export all reports of a HackenProof program into a structured file (Markdown, JSON, or CSV — user's choice)",
       "source": "./plugins/hackenproof-all-reports-export"
+    },
+    {
+      "name": "hackenproof-poc-grader",
+      "description": "Grade PoC evidence quality in HackenProof reports before triage",
+      "source": "./plugins/hackenproof-poc-grader"
+    },
+    {
+      "name": "hackenproof-triage-mistakes",
+      "description": "Accumulated triage mistakes and corrections to load before each session",
+      "source": "./plugins/hackenproof-triage-mistakes"
+    },
+    {
+      "name": "hackenproof-comment-templates",
+      "description": "Standard comment templates for HackenProof triage closures",
+      "source": "./plugins/hackenproof-comment-templates"
     }
   ]
 }

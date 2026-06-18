@@ -1,0 +1,8 @@
+{
+  "name": "hackenproof-comment-templates",
+  "version": "0.1.0",
+  "description": "Standard comment templates for HackenProof triage closures",
+  "author": {
+    "name": "HackenProof"
+  }
+}

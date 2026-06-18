@@ -1,0 +1,4 @@
+interface:
+  display_name: "HackenProof PoC Grader"
+  short_description: "Grade evidence quality before triaging a report"
+  default_prompt: "Use $hackenproof-poc-grader to evaluate the evidence quality in this report and return a verdict before triage."

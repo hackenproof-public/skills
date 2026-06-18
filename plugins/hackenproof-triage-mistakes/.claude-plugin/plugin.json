@@ -1,0 +1,8 @@
+{
+  "name": "hackenproof-triage-mistakes",
+  "version": "0.1.0",
+  "description": "Accumulated triage mistakes and corrections to load before each session",
+  "author": {
+    "name": "HackenProof"
+  }
+}
