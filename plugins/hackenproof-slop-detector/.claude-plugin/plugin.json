@@ -1,0 +1,8 @@
+{
+  "name": "hackenproof-slop-detector",
+  "version": "0.1.0",
+  "description": "Check a report's cited facts against the repository, advisory databases, and the chain before any reputation penalty is decided",
+  "author": {
+    "name": "HackenProof"
+  }
+}
