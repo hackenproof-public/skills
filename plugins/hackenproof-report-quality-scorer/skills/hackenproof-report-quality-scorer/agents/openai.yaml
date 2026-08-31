@@ -1,0 +1,4 @@
+interface:
+  display_name: "HackenProof Report Quality Scorer"
+  short_description: "Score a pasted vulnerability report on completeness and actionability"
+  default_prompt: "Use $hackenproof-report-quality-scorer to score this pasted vulnerability report on completeness and actionability, and list what is missing."
