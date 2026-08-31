@@ -1,0 +1,4 @@
+interface:
+  display_name: "HackenProof Slop Detector"
+  short_description: "Verify a report's cited files, CVEs and transactions actually exist"
+  default_prompt: "Use $hackenproof-slop-detector to check whether this report's citations hold up."
