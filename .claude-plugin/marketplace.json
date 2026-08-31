@@ -44,6 +44,11 @@
       "name": "hackenproof-comment-templates",
       "description": "Standard comment templates for HackenProof triage closures",
       "source": "./plugins/hackenproof-comment-templates"
+    },
+    {
+      "name": "hackenproof-report-quality-scorer",
+      "description": "Score a pasted vulnerability report on completeness and actionability before triage",
+      "source": "./plugins/hackenproof-report-quality-scorer"
     }
   ]
 }

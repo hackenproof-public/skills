@@ -1,0 +1,8 @@
+{
+  "name": "hackenproof-report-quality-scorer",
+  "version": "0.1.0",
+  "description": "Score a pasted vulnerability report on completeness and actionability before triage",
+  "author": {
+    "name": "HackenProof"
+  }
+}
