@@ -41,10 +41,13 @@ If you believe this maps to a different in-scope target, share that target and e
 
 ## Duplicate
 
+Name the confirmed matching root cause inside the second sentence, in your own words
+and using only independently verified facts already present in the current report.
+Do not include another report's ID or any detail from the primary report that is
+absent here. Keep the draft to two sentences.
+
 ```md
 Thanks for the submission.
 
-This issue matches an existing report with the same root cause and impact: **<report-id>**.
-
-We are marking this report as **Duplicate**.
+This issue matches an existing report with the same root cause and impact — <the confirmed root cause, in this report's own terms> — so we are marking it as **Duplicate**.
 ```
