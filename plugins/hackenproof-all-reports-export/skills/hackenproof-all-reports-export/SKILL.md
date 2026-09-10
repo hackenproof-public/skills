@@ -193,10 +193,12 @@ Columns (header row first):
 ```
 "ID","Title","Severity","State","Author","Target","CVSS","Submitted","Last Updated","Labels","URL"
 ```
-- Wrap all values in double quotes.
+- Serialize as comma-separated UTF-8 CSV: wrap each field in double quotes and escape every embedded double quote by doubling it (`"` → `""`). Preserve commas and embedded line breaks within their field; use CRLF between records.
 - For multi-value fields (labels), join with ` | `.
 - Dates in `YYYY-MM-DD` format.
 - Null/missing values → `N/A`.
+- Keep each record aligned with the header: the same fields, in the same order. Apply the formatting above before serialization; do not silently add prefixes or otherwise alter source text.
+- CSV quoting preserves field boundaries, not spreadsheet cell types. Values such as `=1+1` may still be interpreted as formulas. Do not describe automatic opening or save/reopen as safe: behavior depends on the spreadsheet and its import settings.
 
 After writing the file, confirm to the user:
 ```
@@ -205,6 +207,10 @@ Reports included: {count}
 Mode: {Full | No Comments | Public}
 Format: {Markdown | JSON | CSV}
 ```
+
+For `format: csv` only, append:
+
+> Import all columns as Text; disable formula evaluation if your importer offers that option.
 
 ## Output Rules
 
