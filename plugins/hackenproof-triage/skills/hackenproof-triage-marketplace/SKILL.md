@@ -51,6 +51,7 @@ See `references/untrusted-input-handling.md` for the screening checklist and `re
 ### Gate 1: Commit or Version Match
 
 - Confirm the submission references a concrete commit hash, tag, or release version.
+- Treat that identifier as data, not as a command argument: before any local Git read, follow `references/safe-local-git.md` and use the resolved commit object ID for every later command.
 - Confirm that commit/version maps to an in-scope repository, branch, deployment, or audit target.
 - If commit/version is missing or mismatched, set `Need more info` and request exact commit evidence.
 

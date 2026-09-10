@@ -110,7 +110,7 @@ For each report, apply the full single-report triage logic from `hackenproof-tri
 2. Call `get_report_details` to get description, target, version, steps.
 3. Call `get_attachments`; read relevant ones with `fetch_attachment`.
 4. Check Gate 1: commit/version match against program scope.
-   - Mode A (local repo): use `git -C {repo} log --oneline` or `git -C {repo} show {commit}` to verify the reported commit exists and is in scope.
+   - Mode A (local repo): resolve the reported identifier with the single-report skill's `references/safe-local-git.md`, then follow its fixed read commands using only the resolved commit object ID. A successful read is not scope evidence: compare the resolved commit with the program scopes. If the identifier is the problem, recommend `Need more info`; if the repository or Git is, note that local version verification was not completed and fall back to Mode C for that report.
    - Mode B (explorer URL): verify the reported contract address or tx hash matches the scoped explorer URL. Check that the address in the report matches what `get_program_info` scopes list.
    - Mode C (API-only): rely solely on program rules and report description; note inability to verify version locally.
 5. Check Gate 2: scope match (target asset + impact category).
@@ -202,7 +202,7 @@ After printing the full recommendation report, ask:
 - Never apply any action before Step 7 user confirmation.
 - Read-only operations (fetching reports, comments, attachments, program info) do NOT require user confirmation — proceed automatically throughout Steps 1–6.
 - Only pause at Step 7 before executing write actions (`change_state`, `change_severity`, `add_labels`, `add_comment`).
-- Never guess a commit exists in the local repo — verify with `git log` or `git cat-file`.
+- Never guess a commit exists in the local repo — resolve the reported identifier through the single-report skill's `references/safe-local-git.md` and check the resolved object ID; never pass report text to `git log`, `git show`, `git diff`, or `git cat-file`.
 - If local repo sync fails, still analyze the report using API data only; note "no local code validation" in the recommendation.
 - Use cached `get_program_info` results — call it once per program, not once per report.
 - Keep recommendations concise: one-line rationale, draft comment under 3 sentences.
