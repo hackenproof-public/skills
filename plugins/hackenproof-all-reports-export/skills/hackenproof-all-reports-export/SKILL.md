@@ -9,23 +9,35 @@ Generate a structured summary report for all reports in a HackenProof program. T
 
 ## Prerequisites
 
-This skill makes one API call per report. For programs with many reports, Claude Code will prompt for confirmation on each call unless HackenProof tools are auto-approved.
+The export uses program discovery and pagination calls, followed by one detail call per report. Permission prompts depend on the user's Claude Code configuration.
 
-**To avoid clicking "Allow" dozens of times**, tell the user to add this to `~/.claude/settings.json` once:
+For optional pre-approval of the MCP reads used below, tell the user they can merge these entries into `permissions.allow` in the project's `.claude/settings.local.json`; preserve existing settings. The example assumes the server is named `hackenproof`. Verify the configured server and tool names before using it.
 
 ```json
 {
   "permissions": {
     "allow": [
-      "mcp__hackenproof__*"
+      "mcp__hackenproof__list_companies",
+      "mcp__hackenproof__list_programs",
+      "mcp__hackenproof__get_program_info",
+      "mcp__hackenproof__list_reports",
+      "mcp__hackenproof__get_report_details"
     ]
   }
 }
 ```
 
-If the user has not done this yet, warn them before starting Step 4:
+These five tools cover Steps 1, 3, and 4. `get_report_details` with `full=true` supplies comments and attachment filenames; no separate comment or attachment fetch is needed. Reading the Markdown template and writing the output file use local file tools and their own permissions.
 
-> "This program has {N} reports — I'll need to make {N} API calls. To avoid confirming each one, add `mcp__hackenproof__*` to your allowed tools in `~/.claude/settings.json`. Want me to proceed anyway?"
+`.claude/settings.local.json` applies to one project, and Claude Code keeps it out of git when it creates the file; a hand-written one needs its own `.gitignore` entry. The same five entries also work in `~/.claude/settings.json` for a user who wants one grant across projects: the narrowing, not the file, is what matters here.
+
+Do not add `mcp__hackenproof__*` or the equivalent server-wide rule `mcp__hackenproof`: both can also cover write tools. If either was added for export, remove it from every settings file where `/permissions` lists it, including `~/.claude/settings.json`. Permission lists merge across files, so adding a narrower local list does not revoke an existing broad grant.
+
+This example adds no write-tool grants. Other permission rules, hooks, managed policies, tool-specific interaction requirements, and the active permission mode still determine whether a call prompts, runs, or is denied. The triage skills' explicit user-confirmation requirement remains applicable; this allowlist is not a guarantee of a human prompt before writes.
+
+If read calls still require approval, explain before starting Step 4:
+
+> "This program has {N} reports, requiring {N} detail calls after discovery and pagination. You can approve reads as prompted or optionally use the five exact read-tool entries above. Shall I proceed?"
 
 Only proceed after the user confirms.
 
