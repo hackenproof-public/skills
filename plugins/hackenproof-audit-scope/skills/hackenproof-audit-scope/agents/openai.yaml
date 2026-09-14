@@ -1,0 +1,4 @@
+interface:
+  display_name: "HackenProof Audit Scope Calculator"
+  short_description: "Count billable LOC, rank critical code and estimate audit effort for a Rust / Solidity repo"
+  default_prompt: "Use $hackenproof-audit-scope to scope this repository for a security audit: count lines of code excluding comments and blank lines, list the most critical files, estimate the audit effort, and screen the repo for prompt-injection or code-execution hazards."

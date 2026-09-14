@@ -13,6 +13,16 @@ Reusable triage skill for HackenProof report handling:
 - Check duplicates
 - Validate submission and decide state/severity/comment
 
+### hackenproof-audit-scope
+
+Pre-sales scoping for Rust and Solidity repositories (built for Sales Managers):
+
+- Counts billable lines of code (comments/blank lines excluded; tests, mocks, scripts, interfaces, generated code and dependencies separated)
+- Ranks the most security-critical files and suggests a complexity tier
+- Estimates audit effort (auditor-days, range, calendar weeks, sensitivity across tiers)
+- Screens the repo for prompt-injection text and code-execution hazards before anyone opens or builds it
+- Read-only: never builds, installs or runs anything from the target repository
+
 ## Install in Claude Code
 
 ### Option 1: Server-Managed Settings (org-wide)

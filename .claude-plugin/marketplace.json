@@ -27,7 +27,7 @@
     },
     {
       "name": "hackenproof-all-reports-export",
-      "description": "Export all reports of a HackenProof program into a structured file (Markdown, JSON, or CSV — user's choice)",
+      "description": "Export all reports of a HackenProof program into a structured file (Markdown, JSON, or CSV \u2014 user's choice)",
       "source": "./plugins/hackenproof-all-reports-export"
     },
     {
@@ -49,6 +49,11 @@
       "name": "hackenproof-report-quality-scorer",
       "description": "Score a pasted vulnerability report on completeness and actionability before triage",
       "source": "./plugins/hackenproof-report-quality-scorer"
+    },
+    {
+      "name": "hackenproof-audit-scope",
+      "description": "Scope a Rust / Solidity repository for an audit quote: billable LOC, critical files, effort estimate, injection & code-execution screen (for Sales Managers)",
+      "source": "./plugins/hackenproof-audit-scope"
     }
   ]
 }
