@@ -1,0 +1,8 @@
+{
+  "name": "hackenproof-audit-scope",
+  "version": "0.1.0",
+  "description": "Scope a Rust / Solidity repository for a security audit: count billable lines of code, rank critical files, estimate effort, and screen for prompt-injection and code-execution hazards",
+  "author": {
+    "name": "HackenProof"
+  }
+}
