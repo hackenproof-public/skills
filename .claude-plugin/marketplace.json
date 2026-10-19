@@ -49,6 +49,11 @@
       "name": "hackenproof-report-quality-scorer",
       "description": "Score a pasted vulnerability report on completeness and actionability before triage",
       "source": "./plugins/hackenproof-report-quality-scorer"
+    },
+    {
+      "name": "hackenproof-slop-detector",
+      "description": "Check a report's cited files, CVEs and transactions against the repository, advisory databases and the chain",
+      "source": "./plugins/hackenproof-slop-detector"
     }
   ]
 }
