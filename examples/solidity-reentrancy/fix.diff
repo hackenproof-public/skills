@@ -1,0 +1,27 @@
+--- a/src/Vault.sol
++++ b/src/Vault.sol
+@@ -4,7 +4,15 @@
+ /// @notice Intentionally vulnerable contract for the skills walkthrough. Do not deploy.
+ contract Vault {
+     mapping(address => uint256) public balances;
++    bool private locked;
+ 
++    modifier nonReentrant() {
++        require(!locked, "reentrant call");
++        locked = true;
++        _;
++        locked = false;
++    }
++
+     function deposit() external payable {
+         balances[msg.sender] += msg.value;
+     }
+@@ -16,7 +24,7 @@
+         balances[msg.sender] -= amount;
+     }
+ 
+-    function withdrawAll() external {
++    function withdrawAll() external nonReentrant {
+         uint256 amount = balances[msg.sender];
+         (bool ok,) = msg.sender.call{value: amount}("");
+         require(ok, "transfer failed");

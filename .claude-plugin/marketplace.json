@@ -1,6 +1,6 @@
 {
   "name": "hackenproof-skills",
-  "description": "HackenProof bug bounty triage skills and tools",
+  "description": "Agent skills for triaging Ethereum and EVM smart contract security reports: report scoring, PoC grading, fix verification and HackenProof triage workflows",
   "owner": {
     "name": "HackenProof"
   },
