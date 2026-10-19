@@ -15,11 +15,13 @@ second means *we looked and it is not there*. Collapsing them is the failure thi
 prevent.
 
 The list is closed: five verdicts, no sixth. Anything more specific is a **detail** carried alongside
-the verdict, never a verdict of its own. The on-chain checks produce three of these:
+the verdict, never a verdict of its own:
 
 | Detail | Verdict it sits under | Why |
 |---|---|---|
-| `structurally-invalid` | `contradicted` | The string cannot be a hash. Decided locally, no provider asked. |
+| `structurally-invalid` | `contradicted` | The string cannot be a hash or identifier. Decided locally, no provider asked. |
+| `path-drift` | `verified-with-drift` | The file or symbol exists at a different path than cited. |
+| `unsafe-input` | `unresolvable` | The cited path, tag, symbol or number failed its Input safety pattern, so the check was not run. |
 | `pruned-inconclusive` | `unresolvable` | The ledger no longer holds that period. We did not look. |
 | `not-found-in-range` | `contradicted` | The node holds that period and the transaction is not in it. |
 
@@ -27,7 +29,7 @@ the verdict, never a verdict of its own. The on-chain checks produce three of th
 
 ## Prose-PoC screen
 
-The fourth check from the issue, and the only one needing no external source.
+The only check that needs no external source.
 
 A PoC is prose when the submission describes what an attacker would observe rather than showing what
 the reporter observed: no pasted response, no real identifier, no attachment, no log line, no
@@ -35,7 +37,7 @@ transaction — every specific-looking element a placeholder, a hypothetical, or
 the result withheld.
 
 `hackenproof-report-quality-scorer` scores the same property as its Dimension 3 (Impact & Evidence),
-where a 0 is "evidence is only described rather than included". Where that skill is available, defer
+where "evidence is only described rather than included" scores 1 and "no demonstrated impact" scores 0. Where that skill is available, defer
 to its score rather than reimplementing the judgement, and carry the result through as one line here. Prose-PoC is **never** a fabrication finding on its own — a thin report is
 thin, and thin is not dishonest.
 
@@ -66,7 +68,7 @@ no penalty and say what would settle it.
 ## Output shape
 
 ```
-# Citation Check — {PROG-N}
+# Citation Check — {report ID}
 
 Commit checked: {sha}  ({how it was established})
 Looked up on:   {YYYY-MM-DD}

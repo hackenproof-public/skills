@@ -1,5 +1,9 @@
 # Advisory Checks
 
+Every CVE and GHSA identifier must match its pattern in `SKILL.md` (Input safety) before it is
+used in a command. An identifier that does not match cannot exist in either database, so it is
+**`contradicted`** with detail `structurally-invalid`, and nothing is sent anywhere.
+
 Two sources, different jobs. NVD answers "does this CVE exist and what product is it about". GitHub
 Security Advisories answer "which versions of this package are affected", which NVD does not give in
 a directly comparable form.
@@ -12,7 +16,7 @@ re-checked later.
 ## A1 — Does the CVE exist
 
 ```bash
-curl -s "https://services.nvd.nist.gov/rest/json/cves/2.0?cveId=CVE-2021-44228" \
+curl -s "https://services.nvd.nist.gov/rest/json/cves/2.0?cveId=$CVE" \
  | python3 -c "import json,sys; d=json.load(sys.stdin); print(d['totalResults'])"
 ```
 
@@ -31,7 +35,7 @@ A reserved-but-unpublished CVE returns a record with no description and no confi
 ## A2 — Is it about the right product
 
 ```bash
-curl -s "https://services.nvd.nist.gov/rest/json/cves/2.0?cveId={CVE}" | python3 -c "
+curl -s "https://services.nvd.nist.gov/rest/json/cves/2.0?cveId=$CVE" | python3 -c "
 import json,sys
 v=json.load(sys.stdin)['vulnerabilities'][0]['cve']
 print([x['value'] for x in v['descriptions'] if x['lang']=='en'][0][:200])
@@ -57,7 +61,7 @@ More useful than NVD for anything with a package manifest, because it carries af
 By identifier:
 
 ```bash
-gh api /advisories/GHSA-jfh8-c2jp-5v3q \
+gh api "/advisories/$GHSA" \
  --jq '{ghsa_id,cve_id,severity,summary,pkgs:[.vulnerabilities[].package.name]}'
 ```
 
@@ -98,8 +102,8 @@ Rules that keep this honest:
 
 ## A5 — Recency
 
-A published CVE younger than thirty days is out of scope for a bounty under the programme's own
-rules, but that is a scope decision, not a slop finding. Record the publication date and leave the
+Some programmes put CVEs published in the last thirty days out of scope. Check the programme's own
+rules rather than assuming it; either way that is a scope decision, not a slop finding. Record the publication date and leave the
 disposition to triage. Do not fold it into a citation verdict.
 
 ## Reporting
